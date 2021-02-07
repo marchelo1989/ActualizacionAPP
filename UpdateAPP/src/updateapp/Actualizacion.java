@@ -61,7 +61,6 @@ public class Actualizacion {
         try {
             Scanner s = new Scanner(url.openStream()).useDelimiter("\\2");
             String contenido = s.next();
-            System.out.println(contenido);
             return contenido;
         } catch (IOException ex) {
             Logger.getLogger(Actualizacion.class.getName()).log(Level.SEVERE, null, ex);

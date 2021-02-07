@@ -115,7 +115,7 @@ public class FrHome extends javax.swing.JFrame {
     private void btnDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarActionPerformed
         // TODO add your handling code here:
 //        Actualizacion.abrirEnlace("https://github.com/marchelo1989/ActualizarAPP/releases/download/v1.0/UpdateAPP.jar");
-        Actualizacion.descargarUpdate(Confi.UrlDescarga);
+        Actualizacion.descargarUpdate();
     }//GEN-LAST:event_btnDescargarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed

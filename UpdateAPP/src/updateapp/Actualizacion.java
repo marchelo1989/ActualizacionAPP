@@ -61,6 +61,7 @@ public class Actualizacion {
         try {
             Scanner s = new Scanner(url.openStream()).useDelimiter("\\2");
             String contenido = s.next();
+            System.out.println(contenido);
             return contenido;
         } catch (IOException ex) {
             Logger.getLogger(Actualizacion.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,7 +79,8 @@ public class Actualizacion {
     }
     
     //Metodo para descargar el archivo directo desde java
-    public static void descargarUpdate(String url){
+    public static void descargarUpdate(){
+        String url=null;
         try {
             //dirección url del recurso a descargar
 //            String url = "https://github.com/marchelo1989/ActualizarAPP/releases/download/v1.0/UpdateAPP.jar";
@@ -100,6 +102,10 @@ public class Actualizacion {
             
             //Creamos el archivo destino, en caso de existir lo elimina:
             File file = new File(folder + name);
+            
+            //leer archivo url descargas
+            URL urlD = new URL(Confi.UrlDescarga);
+            url=obtenerContenidoURL(urlD);
             
             //Establece la conexion con la url
             URLConnection conn = new URL(url).openConnection();

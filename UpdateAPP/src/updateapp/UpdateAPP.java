@@ -35,7 +35,7 @@ public class UpdateAPP {
                 int respu = JOptionPane.showConfirmDialog(null, "Version "+Actualizacion.obtenerVersion()+ " Diponible \n¿Desea Descargar?");
                 if(respu==0){
                     JOptionPane.showMessageDialog(null, "Descargando Update \nEspere Mensaje");
-                    Actualizacion.descargarUpdate(Confi.UrlDescarga);
+                    Actualizacion.descargarUpdate();
                     resp=true;
                 }else{
                     resp=false;

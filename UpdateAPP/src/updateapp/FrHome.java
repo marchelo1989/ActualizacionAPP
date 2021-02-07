@@ -12,7 +12,11 @@ import java.net.URLConnection;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -28,6 +32,14 @@ public class FrHome extends javax.swing.JFrame {
         setLocationRelativeTo(null); 
         setResizable(false); 
         setTitle("Updates");
+        String url="/updateapp/";
+        ((JPanel)getContentPane()).setOpaque(false);
+        ImageIcon MyImgCustom =new ImageIcon(this.getClass().getResource(url+"Fondo.jpg"));
+        JLabel fondo= new JLabel();
+        
+        fondo.setIcon(MyImgCustom);
+        getLayeredPane().add(fondo,JLayeredPane.FRAME_CONTENT_LAYER);
+        fondo.setBounds(0,0,MyImgCustom.getIconWidth(),MyImgCustom.getIconHeight());
         
         lblMensaje.setText("");
         btnDescargar.setVisible(false);
@@ -158,14 +170,6 @@ public class FrHome extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtTamaño)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblTamaño))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtNombre)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNombre))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtUrl)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblUrl))
@@ -177,7 +181,16 @@ public class FrHome extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addComponent(lblVersion))
-                            .addComponent(lblMensaje))))
+                            .addComponent(lblMensaje)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(txtTamaño)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblTamaño))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(txtNombre)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblNombre))))))
                 .addContainerGap(276, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

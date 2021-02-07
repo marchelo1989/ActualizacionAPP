@@ -8,7 +8,7 @@ package updateapp;
 /**
  *
  * @author march
- * v1.0
+ * v1.2
  */
 public interface Confi {
     
@@ -18,7 +18,7 @@ public interface Confi {
     //Configuraciones para Update
     static String nameArchivo = "UpdateAPP.zip";
     static String CarpetaUpdate = "Update/";
-    static String Version = "1.1";
+    static String Version = "1.2";
     static String UrlVersion = "https://raw.githubusercontent.com/marchelo1989/ActualizacionAPP/main/version.txt";
     static String UrlDescarga = "https://raw.githubusercontent.com/marchelo1989/ActualizacionAPP/main/Descargas.txt";
 }

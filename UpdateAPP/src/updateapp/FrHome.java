@@ -5,7 +5,11 @@
  */
 package updateapp;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,10 +25,52 @@ public class FrHome extends javax.swing.JFrame {
      */
     public FrHome() {
         initComponents();
+        setLocationRelativeTo(null); 
+        setResizable(false); 
+        setTitle("Updates");
+        
         lblMensaje.setText("");
         btnDescargar.setVisible(false);
+        lblVersion.setText(Confi.Version);
+        visibleTxt(false);
     }
 
+    public void visibleTxt(boolean act){
+        txtVersionD.setVisible(act);
+        lblVersionD.setVisible(act);
+        txtUrl.setVisible(act);
+        lblUrl.setVisible(act);
+        txtNombre.setVisible(act);
+        lblNombre.setVisible(act);
+        txtTamaño.setVisible(act);
+        lblTamaño.setVisible(act);
+    }
+    public void info() throws MalformedURLException, IOException{
+        String url=null;
+        //leer archivo url descargas
+        String name = Confi.nameArchivo;
+            URL urlD = new URL(Confi.UrlDescarga);
+            url=obtenerContenidoURL(urlD);
+            
+            //Establece la conexion con la url
+            URLConnection conn = new URL(url).openConnection();
+            conn.connect();
+            visibleTxt(true);
+            lblVersionD.setText(Actualizacion.obtenerVersion());
+            lblUrl.setText(url);
+            lblNombre.setText(name);
+            lblTamaño.setText(conn.getContentLength() + " bytes");
+    }
+    private static String obtenerContenidoURL(URL url) {
+        try {
+            Scanner s = new Scanner(url.openStream()).useDelimiter("\\2");
+            String contenido = s.next();
+            return contenido;
+        } catch (IOException ex) {
+            Logger.getLogger(Actualizacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,10 +84,16 @@ public class FrHome extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         btnDescargar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jLabel1 = new javax.swing.JLabel();
+        lblVersion = new javax.swing.JLabel();
+        txtVersionD = new javax.swing.JLabel();
+        lblVersionD = new javax.swing.JLabel();
+        txtUrl = new javax.swing.JLabel();
+        lblUrl = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JLabel();
+        txtTamaño = new javax.swing.JLabel();
+        lblTamaño = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,51 +121,96 @@ public class FrHome extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("Home");
-        jMenuBar1.add(jMenu1);
+        jLabel1.setText("Version Actual:");
 
-        jMenu2.setText("Updates");
+        lblVersion.setText("jLabel3");
 
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("Buscar Updates");
-        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jCheckBoxMenuItem1);
+        txtVersionD.setText("Version Disponible:");
 
-        jMenuBar1.add(jMenu2);
+        lblVersionD.setText("jLabel3");
 
-        setJMenuBar(jMenuBar1);
+        txtUrl.setText("Url:");
+
+        lblUrl.setText("jLabel4");
+
+        lblNombre.setText("jLabel6");
+
+        txtNombre.setText("Nombre:");
+
+        txtTamaño.setText("Tamaño:");
+
+        lblTamaño.setText("jLabel6");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMensaje)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
                         .addComponent(btnBuscar)
                         .addGap(18, 18, 18)
                         .addComponent(btnDescargar)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSalir)))
-                .addContainerGap(91, Short.MAX_VALUE))
+                        .addComponent(btnSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtTamaño)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblTamaño))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtNombre)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblNombre))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtUrl)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblUrl))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtVersionD)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblVersionD))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblVersion))
+                            .addComponent(lblMensaje))))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblVersion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMensaje)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtVersionD)
+                    .addComponent(lblVersionD))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUrl)
+                    .addComponent(lblUrl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombre)
+                    .addComponent(lblNombre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTamaño)
+                    .addComponent(lblTamaño))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
                     .addComponent(btnDescargar)
                     .addComponent(btnSalir))
-                .addGap(69, 69, 69))
+                .addGap(38, 38, 38))
         );
 
         pack();
@@ -143,6 +240,7 @@ public class FrHome extends javax.swing.JFrame {
                     if(Actualizacion.verificarConexion()){
                         if(Actualizacion.obtenerVersion().equals(Confi.Version)){
                             lblMensaje.setText("La aplicacion esta actualizada");
+                            info();
                         }else{
                             lblMensaje.setText("Version "+Actualizacion.obtenerVersion()+ " Diponible");
                             btnDescargar.setVisible(true);
@@ -152,15 +250,12 @@ public class FrHome extends javax.swing.JFrame {
                     }
                 }catch (InterruptedException ex) {
 //                    Logger.getLogger(FrHome.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(FrHome.class.getName()).log(Level.SEVERE, null, ex);
                 }                
             }
         }).start();
     }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Todavia no esta Terninada esta Parte");
-    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,10 +296,16 @@ public class FrHome extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnDescargar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblMensaje;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblTamaño;
+    private javax.swing.JLabel lblUrl;
+    private javax.swing.JLabel lblVersion;
+    private javax.swing.JLabel lblVersionD;
+    private javax.swing.JLabel txtNombre;
+    private javax.swing.JLabel txtTamaño;
+    private javax.swing.JLabel txtUrl;
+    private javax.swing.JLabel txtVersionD;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,7 @@ package updateapp;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,6 +41,7 @@ public class FrHome extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +73,16 @@ public class FrHome extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Updates");
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("Buscar Updates");
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jCheckBoxMenuItem1);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -145,6 +157,11 @@ public class FrHome extends javax.swing.JFrame {
         }).start();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Todavia no esta Terninada esta Parte");
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -184,6 +201,7 @@ public class FrHome extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnDescargar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
